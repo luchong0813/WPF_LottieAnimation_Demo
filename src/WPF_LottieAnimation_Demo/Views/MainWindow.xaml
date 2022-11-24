@@ -1,0 +1,38 @@
+﻿<Window
+    x:Class="WPF_LottieAnimation_Demo.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lottie="clr-namespace:LottieSharp;assembly=LottieSharp"
+    xmlns:prism="http://prismlibrary.com/"
+    Title="{Binding Title}"
+    Width="1000"
+    Height="600"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <TextBlock Text="{Binding ElementName=PART_Lottie, Path=FileName, StringFormat={}动画文件：{0}}" />
+            <TextBlock Text="{Binding ElementName=PART_Lottie, Path=RepeatCount, StringFormat={}重复次数：{0}}" />
+            <TextBlock Text="{Binding ElementName=PART_Lottie, Path=RepeatMode, StringFormat={}重复模式：{0}}" />
+        </StackPanel>
+
+        <lottie:LottieAnimationView
+            x:Name="PART_Lottie"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            AutoPlay="True"
+            FileName="{Binding CurrentFile}" />
+        <Button
+            Grid.Row="1"
+            Width="150"
+            Height="30"
+            Margin="0,10"
+            Command="{Binding NextCommand}"
+            CommandParameter="{Binding ElementName=PART_Lottie}"
+            Content="给爷换一个" />
+    </Grid>
+</Window>
